@@ -8,6 +8,7 @@
 
   $store.numQuestions = 10;
   let musicBg = null;
+  const audioBase = import.meta.env.BASE_URL;
   let loaded = loadData();
   let isPlaying = false;
   let canStart = false;
@@ -72,7 +73,7 @@
 
 <audio
   bind:this="{musicBg}"
-  src="audio/quiz-music.ogg"
+  src="{audioBase}audio/quiz-music.ogg"
   type="audio/ogg"
   controls="{false}"
   loop
