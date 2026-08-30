@@ -1617,7 +1617,7 @@
         };
       }
       function modes() {
-        app.innerHTML = `<div class="screen"><div class="panel" style="margin-bottom:20px"><h1>El libro que te ha elegido</h1><div class="sub">¿Qué historia te estaba esperando?</div></div><div class="modeGrid"><button class="mode panel" id="normal"><h2>Descubrir mi libro</h2><small>10 preguntas · recomendado</small></button><button class="mode panel" id="full"><h2>Quiz completo</h2><small>64 preguntas · más preciso</small></button></div></div>`;
+        app.innerHTML = `<div class="screen"><div class="panel" style="margin-bottom:20px"><h1>Puedes buscar una respuesta </h1><div class="sub">o dejar que te encuentre</div></div><div class="modeGrid"><button class="mode panel" id="normal"><h2>Buscar una respuesta</h2><small>10 preguntas · recomendado</small></button><button class="mode panel" id="full"><h2>Dejar que te encuentre</h2><small>64 preguntas · más preciso</small></button></div></div>`;
         document.getElementById("normal").onclick = () => {
           click();
           begin(10);
