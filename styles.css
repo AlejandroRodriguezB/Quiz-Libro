@@ -420,16 +420,20 @@
      .result {
          grid-template-columns: 1fr;
          width: 96vw;
-         height: 94vh;
+         height: auto;
+         min-height: 94vh;
          overflow: visible;
      }
 
      .resultSide {
          min-height: auto;
+         width: 100%;
+         padding: 12px 8px;
      }
 
-     .resultSide.chartSide {
-         display: none;
+     .chartWrap {
+         width: min(360px, 82vw);
+         height: min(360px, 62vw);
      }
 
      .coverFrame {
