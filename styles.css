@@ -1,0 +1,450 @@
+ @font-face {
+     font-family: pmdFont;
+     src: url("./files/pkmn-font.ttf");
+ }
+
+ * {
+     box-sizing: border-box;
+     font-family: pmdFont, system-ui, sans-serif;
+ }
+
+ html,
+ body {
+     margin: 0;
+     width: 100%;
+     height: 100%;
+     background: #000;
+     color: #fff;
+     overflow: hidden;
+ }
+
+ button {
+     font: inherit;
+     color: inherit;
+     cursor: pointer;
+ }
+
+ .bgLayer {
+     position: fixed;
+     inset: 0;
+     width: 100%;
+     height: 100%;
+     overflow: hidden;
+     background: #05070b;
+     z-index: 0;
+ }
+
+ .bgLayer {
+     background-image: url("./files/img/others/dreambackloop.png");
+     background-size: cover;
+     background-position: center;
+ }
+
+ .bgLayer img {
+     display: block;
+     position: absolute;
+     min-width: 100%;
+     height: 100%;
+     object-fit: cover;
+     object-position: center;
+     pointer-events: none;
+     z-index: 1;
+ }
+
+ .bgBack {
+     opacity: 0.95;
+     animation: driftBack 180s linear infinite;
+ }
+
+ .bgFront {
+     opacity: 0.5;
+     animation: driftFront 120s linear infinite;
+     mix-blend-mode: screen;
+ }
+
+ @keyframes driftBack {
+     from {
+         transform: scale(1.05) translateX(0);
+     }
+
+     to {
+         transform: scale(1.05) translateX(-3%);
+     }
+ }
+
+ @keyframes driftFront {
+     from {
+         transform: scale(1.08) translateX(-3%);
+     }
+
+     to {
+         transform: scale(1.08) translateX(3%);
+     }
+ }
+
+ .shade {
+     position: absolute;
+     z-index: 3;
+     inset: 0;
+     background: radial-gradient(circle at center, rgba(15, 20, 30, 0.1), rgba(0, 0, 0, 0.72));
+ }
+
+ .screen {
+     position: relative;
+     z-index: 2;
+     width: 100vw;
+     height: 100vh;
+     padding: 4vh 4vw;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+     overflow: auto;
+     scrollbar-width: none;
+     -ms-overflow-style: none;
+ }
+
+ .screen::-webkit-scrollbar {
+     display: none;
+ }
+
+ .panel {
+     background: rgba(12, 14, 19, 0.82);
+     backdrop-filter: blur(5px);
+     border: 12px solid transparent;
+     border-image: url("./files/img/others/pmdtextbox.png") 43 round;
+     border-radius: 10px;
+     padding: 18px;
+     box-shadow: 0 8px 38px rgba(0, 0, 0, 0.5);
+ }
+
+ h1 {
+     font-size: clamp(1.45rem, 4vw, 3.15rem);
+     margin: 0.25em 0;
+ }
+
+ h2 {
+     font-size: clamp(1.3rem, 3vw, 2.4rem);
+     margin: 0.25em 0;
+ }
+
+ .sub {
+     opacity: 0.8;
+     font-size: clamp(1rem, 2vw, 1.45rem);
+ }
+
+ .intro {
+     width: min(980px, 94vw);
+     line-height: 1.65;
+     font-size: clamp(1rem, 2vw, 1.35rem);
+     text-align: left;
+     cursor: pointer;
+ }
+
+ .intro p {
+     margin: 0.8em 0;
+ }
+
+ .intro .quote {
+     font-style: italic;
+     text-align: center;
+     color: #f4e9c9;
+     margin: 1.1em auto;
+     max-width: 800px;
+ }
+
+ .intro strong {
+     color: #fff;
+ }
+
+ .continue {
+     margin-top: 22px;
+     text-align: center;
+     opacity: 0.8;
+     animation: blink 1.3s ease-in-out infinite;
+ }
+
+ @keyframes blink {
+     50% {
+         opacity: 0.3;
+     }
+ }
+
+ .modeGrid {
+     display: grid;
+     grid-template-columns: repeat(2, minmax(220px, 1fr));
+     gap: 18px;
+     width: min(900px, 94vw);
+ }
+
+ .mode {
+     min-height: 130px;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     transition:
+         transform 0.2s,
+         filter 0.2s;
+ }
+
+ .mode:hover {
+     transform: translateY(-5px) scale(1.015);
+     filter: brightness(1.12);
+ }
+
+ .mode small {
+     opacity: 0.7;
+     margin-top: 7px;
+ }
+
+ .answers {
+     width: min(760px, 94vw);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 10px;
+ }
+
+ .qtitle {
+     width: min(1050px, 94vw);
+     margin-bottom: 12px;
+ }
+
+ .answer {
+     width: min(700px, 88vw);
+     min-height: 58px;
+     transition: 0.2s;
+     font-size: clamp(0.95rem, 1.8vw, 1.25rem);
+ }
+
+ .answer:hover {
+     transform: scale(1.025);
+     filter: brightness(1.15);
+ }
+
+ .answer.selected {
+     transform: scale(1.06);
+ }
+
+ .answer.disabled {
+     filter: brightness(0.45);
+ }
+
+ .progress {
+     position: fixed;
+     top: 15px;
+     left: 50%;
+     transform: translateX(-50%);
+     z-index: 4;
+     opacity: 0.7;
+     font-size: 0.9rem;
+ }
+
+ .nature {
+     padding: 30px;
+     width: min(900px, 94vw);
+     font-size: clamp(1rem, 2.2vw, 1.55rem);
+     line-height: 1.5;
+ }
+
+ .tap {
+     position: absolute;
+     bottom: 5%;
+     opacity: 0.7;
+ }
+
+ .arrow {
+     width: 0;
+     height: 0;
+     border-left: 9px solid transparent;
+     border-right: 9px solid transparent;
+     border-top: 9px solid rgba(255, 255, 255, 0.7);
+     animation: pulse 1s infinite;
+ }
+
+ @keyframes pulse {
+     50% {
+         opacity: 0.2;
+     }
+ }
+
+ .result {
+     display: grid;
+     grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr);
+     width: min(1250px, 96vw);
+     height: min(90vh, 900px);
+     gap: 20px;
+ }
+
+ .resultSide {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     padding: 18px;
+     overflow: visible;
+     scrollbar-width: none;
+     -ms-overflow-style: none;
+ }
+
+ .resultSide::-webkit-scrollbar {
+     display: none;
+ }
+
+ .resultTitle {
+     width: min(100%, 420px);
+     max-width: 100%;
+     font-size: clamp(1.35rem, 3vw, 2.5rem);
+     line-height: 1.2;
+     margin-bottom: 16px;
+     text-align: center;
+     overflow-wrap: anywhere;
+     word-break: break-word;
+ }
+
+ .bookCard {
+     width: min(420px, 80vw);
+     padding: 18px 18px 22px;
+     background: linear-gradient(145deg, rgba(25, 27, 35, 0.95), rgba(5, 7, 11, 0.92));
+     border-radius: 14px;
+     box-shadow:
+         0 18px 55px rgba(0, 0, 0, 0.6),
+         0 0 35px rgba(215, 190, 120, 0.1);
+     border: 1px solid rgba(255, 255, 255, 0.12);
+ }
+
+ .coverFrame {
+     position: relative;
+     margin: auto;
+     width: min(300px, 68vw);
+     aspect-ratio: 2/3;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+ .cover {
+     max-width: 100%;
+     max-height: 100%;
+     width: 100%;
+     height: 100%;
+     object-fit: contain;
+     border-radius: 3px;
+     box-shadow: 0 18px 30px rgba(0, 0, 0, 0.55);
+     transition: transform 0.5s;
+ }
+
+ .cover:hover {
+     transform: translateY(-5px) rotate(-0.6deg);
+ }
+
+ .bookTitle {
+     font-size: clamp(1.2rem, 2.4vw, 2rem);
+     line-height: 1.2;
+     margin: 18px 0 4px;
+ }
+
+ .author {
+     font-size: clamp(0.95rem, 1.7vw, 1.25rem);
+     opacity: 0.78;
+ }
+
+ .isbn {
+     font-size: 0.78rem;
+     opacity: 0.4;
+     margin-top: 8px;
+ }
+
+ .restart {
+     margin-top: 18px;
+     padding: 10px 22px;
+     background: rgba(255, 255, 255, 0.06);
+     border: 1px solid rgba(255, 255, 255, 0.2);
+     border-radius: 8px;
+ }
+
+ .restart:hover {
+     background: rgba(255, 255, 255, 0.12);
+ }
+
+ .chartWrap {
+     width: min(610px, 92vw);
+     height: min(610px, 75vh);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     overflow: visible;
+ }
+
+ .chart {
+     width: 100%;
+     height: 100%;
+     display: block;
+ }
+
+ .chart polygon {
+     fill: rgba(255, 255, 255, 0.12);
+     stroke: rgba(255, 255, 255, 0.55);
+     stroke-width: 2;
+ }
+
+ .chart line {
+     stroke: rgba(255, 255, 255, 0.28);
+     stroke-width: 1;
+ }
+
+ .chart text {
+     fill: rgba(255, 255, 255, 0.9);
+     font-family: pmdFont;
+     font-size: 12px;
+     text-anchor: middle;
+ }
+
+ .bookHint {
+     opacity: 0.65;
+     font-size: 0.85rem;
+     margin-top: 10px;
+ }
+
+ @media (max-width: 800px) {
+     .screen {
+         padding: 3vh 3vw;
+     }
+
+     .modeGrid {
+         grid-template-columns: 1fr;
+     }
+
+     .result {
+         grid-template-columns: 1fr;
+         width: 96vw;
+         height: 94vh;
+         overflow: visible;
+     }
+
+     .resultSide {
+         min-height: auto;
+     }
+
+     .resultSide.chartSide {
+         display: none;
+     }
+
+     .coverFrame {
+         width: min(250px, 60vw);
+     }
+
+     .bookCard {
+         width: min(390px, 88vw);
+     }
+
+     .intro {
+         font-size: 1rem;
+     }
+
+     .intro .quote {
+         font-size: 0.95rem;
+     }
+ }
