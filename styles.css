@@ -424,8 +424,9 @@
  .chart text {
      fill: rgba(255, 255, 255, 0.9);
      font-family: pmdFont;
-     font-size: 16px;
+     font-size: 18px;
      text-anchor: middle;
+     dominant-baseline: middle;
  }
 
  .bookHint {

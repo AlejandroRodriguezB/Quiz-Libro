@@ -1393,8 +1393,8 @@
         }).join("");
         let labels = NATURES.map((name, i) => {
           let a = -Math.PI / 2 + (i * 2 * Math.PI) / n,
-            rr = r + 38;
-          return `<text x="${cx + rr * Math.cos(a)}" y="${cy + rr * Math.sin(a)}">${esc(name)}</text>`;
+            rr = r + 54;
+          return `<text x="${cx + rr * Math.cos(a)}" y="${cy + rr * Math.sin(a)}" font-size="18" font-weight="600" text-anchor="middle" dominant-baseline="middle">${esc(name)}</text>`;
         }).join("");
         return `<svg class="chart" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">${grid}${lines}<polygon points="${pts.map((p) => p.join(",")).join(" ")}"/>${labels}</svg>`;
       }
