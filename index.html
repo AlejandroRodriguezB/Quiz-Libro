@@ -1537,11 +1537,7 @@
         { isbn: "9788494468537", title: "El elogio de la sombra", author: "Junichirō Tanizaki" },
         { isbn: "9788419035769", title: "Indigno de ser humano", author: "Osamu Dazai" },
         { isbn: "9788430625628", title: "Vida contemplativa: Elogio de la inactividad", author: "Byung-Chul Han" },
-        {
-          isbn: "9789871622726",
-          title: "Ausencia: acerca de la cultura y la filosofía en el Lejano Oriente",
-          author: "Byung-Chul Han",
-        },
+        { isbn: "9789871622726", title: "Ausencia: acerca de la cultura y la filosofía en el Lejano Oriente", author: "Byung-Chul Han" },
         { isbn: "9788425441035", title: "Hegel y el poder: Un ensayo sobre la amabilidad", author: "Byung-Chul Han" },
         { isbn: "9788433905451", title: "La civilización inconsciente", author: "John Ralston Saul" },
         { isbn: "9788410404175", title: "Hay quien prefiere las ortigas", author: "Junichirō Tanizaki" },
@@ -1562,7 +1558,7 @@
         { isbn: "9788467972979", title: "Mujina Into the Deep 01. Edición especial", author: "Inio Asano" },
         { isbn: "9788412930627", title: "Bibliomania: Edición Deluxe", author: "Macchiro y Obaru" },
         { isbn: "9781910856161", title: "Barrio lejano. Edición definitiva", author: "Jirō Taniguchi" },
-        { isbn: "9781908007438", title: "El perro enamorado de las estrellas", author: "Takashi Murakami" },
+        { isbn: "9781908007438", title: "El perro enamorado de las estrellas", author: "Takashi Murakami" }, 
         { isbn: "9788467962789", title: "Buenas Noches, Punpun 01", author: "Inio Asano" },
         { isbn: "9788467963120", title: "Solanin", author: "Inio Asano" },
         { isbn: "9788416693535", title: "Parasyte nº 01/08", author: "Hitoshi Iwaaki" },
@@ -1717,25 +1713,9 @@
         }
         draw();
       }
-      function coverSources(isbn) {
-        return [
-          `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`,
-          `https://images.weserv.nl/?url=covers.openlibrary.org/isbn/${isbn}-L.jpg`,
-          `./covers/${isbn}.svg`,
-        ];
-      }
       function loadCover(img, book) {
-        const sources = coverSources(book.isbn);
-        let i = 0;
-        function next() {
-          if (i >= sources.length) {
-            img.src = "./covers/" + book.isbn + ".svg";
-            return;
-          }
-          img.src = sources[i++];
-        }
-        img.onerror = next;
-        next();
+        img.src = "./img/covers/" + book.isbn + ".webp";
+        return;
       }
       function chooseBook() {
         const candidates = NATURE_BOOKS[bestNature] || BOOKS.map((_, i) => i);
