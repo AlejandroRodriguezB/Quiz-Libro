@@ -15,23 +15,8 @@
   let finishedTransition = false;
   let isSpanish = getLanguage() === "es";
 
-  async function playBackgroundMusic() {
-    if (!musicBg) return;
-
-    try {
-      musicBg.volume = 0.1;
-      await musicBg.play();
-      isPlaying = true;
-    } catch (error) {
-      console.warn("Audio autoplay blocked by browser policy:", error);
-      isPlaying = false;
-    }
-  }
-
   onMount(() => {
-    if (musicBg) {
-      musicBg.volume = 0.1;
-    }
+    musicBg.volume = 0.1;
     setTimeout(() => {
       window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     }, 100);
@@ -118,13 +103,16 @@
           class="flex flex-col flex-wrap h-screen justify-end bg-none"
           transition:fade
           on:outroend="{() => {
+            if (!isPlaying) {
+              musicBg.play();
+              isPlaying = true;
+            }
             finishedTransition = true;
           }}">
           <div
             class="flex flex-col select-none justify-center items-center text-center h-[45vh] w-screen bg-black/50 hover:bg-black/60 transition-all duration-300 z-10"
-            on:click="{async () => {
+            on:click="{() => {
               canStart = true;
-              await playBackgroundMusic();
             }}"
             on:keydown>
             <h1 class="text-4xl lg:text-8xl text-white animate-pulse">
@@ -136,10 +124,9 @@
           </div>
           <div
             class="flex flex-col select-none justify-center items-center text-center h-[45vh] w-screen bg-black/50 hover:bg-black/60 transition-all duration-300 z-10"
-            on:click="{async () => {
+            on:click="{() => {
               canStart = true;
               $store.numQuestions = -1;
-              await playBackgroundMusic();
             }}"
             on:keydown>
             <h1 class="text-4xl lg:text-8xl text-white animate-pulse">
