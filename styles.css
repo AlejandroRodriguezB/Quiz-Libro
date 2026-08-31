@@ -281,7 +281,7 @@
      grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr);
      width: min(1250px, 96vw);
      height: min(90vh, 900px);
-     gap: 20px;
+     gap: clamp(18px, 2vw, 32px);
  }
 
  .resultSide {
@@ -293,6 +293,23 @@
      overflow: visible;
      scrollbar-width: none;
      -ms-overflow-style: none;
+ }
+
+ .resultSide.chartSide {
+     padding-left: 10px;
+     justify-content: center;
+ }
+
+ .resultSide.chartSide .panel {
+     width: min(100%, 610px);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-align: center;
+ }
+
+ .resultSide.chartSide .panel > * {
+     width: 100%;
  }
 
  .resultSide::-webkit-scrollbar {
@@ -381,6 +398,7 @@
      display: flex;
      align-items: center;
      justify-content: center;
+     margin: 0 auto;
      overflow: visible;
  }
 
@@ -388,6 +406,7 @@
      width: 100%;
      height: 100%;
      display: block;
+     margin: 0 auto;
  }
 
  .chart polygon {
