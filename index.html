@@ -38,7 +38,7 @@
         z-index: 0;
       }
       .bgLayer {
-        background-image: url("./img/others/dreambackloop.png");
+        background-image: url("/public/img/others/dreambackloop.png");
         background-size: cover;
         background-position: center;
       }
@@ -100,7 +100,7 @@
         background: rgba(12, 14, 19, 0.82);
         backdrop-filter: blur(5px);
         border: 12px solid transparent;
-        border-image: url("./img/others/pmdtextbox.png") 43 round;
+        border-image: url("/public/img/others/pmdtextbox.png") 43 round;
         border-radius: 10px;
         padding: 18px;
         box-shadow: 0 8px 38px rgba(0, 0, 0, 0.5);
@@ -374,12 +374,12 @@
   </head>
   <body>
     <div class="bgLayer">
-      <img class="bgBack" src="./img/others/dreambackloop.png" /><img
-        class="bgFront" src="./img/others/dreamfrontloop.png"/>
+      <img class="bgBack" src="/public/img/others/dreambackloop.png" /><img
+        class="bgFront" src="/public/img/others/dreamfrontloop.png"/>
       <div class="shade"></div>
     </div>
-    <audio id="music" src="./audio/quiz-music.ogg" loop preload="auto"></audio>
-    <audio id="clickSound" src="./audio/select-sound.mp3" preload="auto"></audio>
+    <audio id="music" src="/public/audio/quiz-music.ogg" loop preload="auto"></audio>
+    <audio id="clickSound" src="/public/audio/select-sound.mp3" preload="auto"></audio>
     <div id="app"></div>
     <script>
       const QUESTIONS = [
@@ -1714,7 +1714,7 @@
         draw();
       }
       function loadCover(img, book) {
-        img.src = "./img/covers/" + book.isbn + ".webp";
+        img.src = "/public/img/covers/" + book.isbn + ".webp";
         return;
       }
       function chooseBook() {
