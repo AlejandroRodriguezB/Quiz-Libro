@@ -64,7 +64,7 @@ Optional audio files:
 #### `public/`
 Optional assets:
 - pkmn-font.ttf (custom font file)
-- timegear.svg (favicon)
+- ico.svg (favicon)
 
 ### 2. Verify Configuration
 
