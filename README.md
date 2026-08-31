@@ -1,194 +1,115 @@
-# Book Personality Quiz Online
+# Quiz Libro
 
-A web-based personality quiz that matches your personality to one of 29 thought-provoking books. Inspired by the Pokemon Mystery Dungeon personality test, this quiz uses a sophisticated algorithm to determine your book match based on your answers.
+A browser-based personality quiz that matches your answers to a book recommendation. It follows the same idea as the classic PMD personality tests, but with a curated set of books and a custom visual style.
 
 ## About
 
-This is a transformation of the original PMD EoS personality test, redesigned to match personalities with 29 carefully selected books spanning genres like philosophy, contemporary fiction, manga, and dark fantasy.
+This project is a static web app built in plain HTML, CSS and JavaScript. The quiz asks a series of personality questions, scores your answers, and then recommends a book based on the trait profile that best matches you.
 
 ## Features
 
-- **29 Unique Book Personalities** - Each with custom descriptions and metadata
-- **Two Quiz Modes**:
-  - Normal Quiz: 10 random questions
-  - Full Quiz: All 29 questions
-- **Beautiful UI** - Responsive design with smooth animations
-- **Personality Radar Chart** - Visual representation of your affinity with all book types
-- **Book Details** - View title, author, and description for your matched books
-- **Multi-language Ready** - Built to support multiple languages
+- 2 modes:
+  - normal mode: 10 random questions
+  - full mode: all questions
+- responsive layout for desktop and mobile
+- custom background and UI styling
+- result screen with cover, title, author and ISBN
+- personality radar chart
+- static data-driven structure using JSON files
 
-## Books Included
+## Project structure
 
-1. Confesiones de una máscara (Yukio Mishima)
-2. El elogio de la sombra (Junichiro Tanizaki)
-3. Indigno de ser humano (Osamu Dazai)
-4. Vida contemplativa. Elogio de la inactividad (Byung-Chul Han)
-5. Ausencia. Acerca de la cultura y la filosofía del Lejano Oriente (Byung-Chul Han)
-6. Hegel y el poder. Un ensayo sobre la amabilidad (Byung-Chul Han)
-7. La civilización inconsciente (John Ralston Saul)
-8. Hay quien prefiere las ortigas (Junichiro Tanizaki)
-9. Tormenta de flores (Osamu Dazai)
-10. Momo (Michael Ende)
-11. La metamorfosis (Franz Kafka)
-12. Brujería para chicas descarriadas (Grady Hendrix)
-13. La Policía de la Memoria (Yoko Ogawa)
-14. El arco iris de gravedad (Thomas Pynchon)
-15. La sombra fuera del tiempo (H. P. Lovecraft)
-16. La sombra sobre Innsmouth (H. P. Lovecraft)
-17. Cuando Alice se subió a la mesa (Jonathan Lethem)
-18. El ojo del mundo (Robert Jordan)
-19. Carl el Mazmorrero (Matt Dinniman)
-20. Zangetsuki. Crónicas de la luna (Masakuni Oda)
-21. Solaris (Stanisław Lem)
-22. Berserk Master Edition 1 (Kentaro Miura)
-23. Mujina Into the Deep 1 (Inio Asano)
-24. Bibliomania (Macchiro y Obaru)
-25. Barrio lejano (Jiro Taniguchi)
-26. El perro enamorado de las estrellas (Takashi Murakami)
-27. Buenas noches, Punpun 1 (Inio Asano)
-28. Solanin (Inio Asano)
-29. Parasyte 1 (Hitoshi Iwaaki)
+```text
+Quiz-Libro/
+├── index.html
+├── styles.css
+├── files/
+│   ├── books-data.json
+│   ├── audio/
+│   └── img/
+│       ├── covers/
+│       └── others/
+├── README.md
+├── SETUP.md
+├── pkmn-font.ttf
+├── ico.svg
+└── .gitignore
+```
 
-## Getting Started
+## Run locally
 
-### Prerequisites
-
-- Node.js (v16 or higher)
-- npm or yarn
-
-### Installation
+From the project root:
 
 ```bash
-# Clone the repository
-git clone https://github.com/pedrogarauleon-bit/book-quiz-online.git
-cd book-quiz-online
-
-# Install dependencies
-npm install
+python -m http.server 8000
 ```
 
-### Development
+Then open:
 
-```bash
-# Start the development server
-npm run dev
-
-# Open your browser and navigate to http://localhost:5173
+```text
+http://localhost:8000
 ```
 
-### Build for Production
+## Assets required
 
-```bash
-# Build the project
-npm run build
+### Covers
 
-# Preview the build
-npm run preview
+Place the book covers in:
+
+```text
+files/img/covers/
 ```
 
-## Project Structure
+Files are loaded by ISBN, for example:
 
-```
-book-quiz-online/
-├── src/
-│   ├── lib/
-│   │   ├── Answer.svelte           # Answer button component
-│   │   ├── Question.svelte         # Question display component
-│   │   ├── QuestionSystem.svelte   # Quiz flow management
-│   │   ├── ResultScreen.svelte     # Result display with books
-│   │   ├── NatureDecriptor.svelte  # Book personality description
-│   │   └── RadialChart.svelte      # Affinity chart visualization
-│   ├── assets/
-│   │   ├── store.js                # Svelte store for state management
-│   │   └── utils.js                # Utility functions
-│   ├── App.svelte                  # Main app component
-│   ├── app.postcss                 # Tailwind CSS configuration
-│   └── main.js                     # Entry point
-├── public/
-│   ├── lang/
-│   │   └── en/
-│   │       ├── natures-en.json            # 29 personality types
-│   │       ├── questions-en.json          # Quiz questions
-│   │       ├── naturedescription-en.json  # Book personality descriptions
-│   │       ├── natures-to-books-en.json   # Personality to book mapping
-│   │       └── strings-en.json            # UI strings
-│   ├── books-data.json              # Complete book metadata
-│   ├── img/                         # Images and assets
-│   └── audio/                       # Sound effects
-├── index.html                       # HTML template
-├── package.json                     # Dependencies
-├── vite.config.js                   # Vite configuration
-├── svelte.config.js                 # Svelte configuration
-├── tailwind.config.cjs              # Tailwind CSS configuration
-└── README.md                        # This file
+```text
+files/img/covers/9788491040255.webp
 ```
 
-## How It Works
+### UI images
 
-1. **User Answers Questions** - Selects responses to personality questions
-2. **Points Calculation** - Each answer contributes points to different book affinities
-3. **Weighted Scoring** - Points are normalized to show relative affinity
-4. **Result Matching** - The system identifies which book(s) match best
-5. **Display Results** - Shows matched book with title, author, description, and personality profile
+Place decorative assets in:
 
-## Customization
+```text
+files/img/others/
+```
 
-### Adding New Languages
+Common ones include:
+- dreambackloop.png
+- dreamfrontloop.png
+- pmdtextbox.png
 
-To add support for a new language:
+### Audio
 
-1. Create a new folder in `public/lang/[language-code]/`
-2. Copy the JSON files from `public/lang/en/` and translate them
-3. Update language detection in `src/assets/utils.js`
+Optional audio files can go in:
 
-### Modifying Questions
+```text
+files/audio/
+```
 
-Edit `public/lang/en/questions-en.json` to change quiz questions. Each question must include:
+## How it works
 
-- `id`: Unique question identifier
-- `title`: The question text
-- `responses`: Array of answer options, each with:
-  - `id`: Answer identifier
-  - `response`: Answer text
-  - `scores`: Array of book affinities with points
+1. The user answers a set of questions.
+2. Each answer adds points to personality traits.
+3. The app normalizes the scores.
+4. It picks the trait with the highest weight.
+5. The result screen shows a matched book based on that personality.
 
-### Adding Book Cover Images
+## Files of interest
 
-Add book cover images to `public/img/bookcovers/` with names matching the book IDs in `books-data.json`.
+- [index.html](index.html) — full app logic and question data
+- [styles.css](styles.css) — styling, layout and UI behavior
+- [SETUP.md](SETUP.md) — setup and asset instructions
 
-## Technologies Used
+## Notes
 
-- **Svelte** - Reactive UI framework
-- **Vite** - Fast build tool
-- **Tailwind CSS** - Utility-first CSS framework
-- **Chart.js** - Data visualization
-- **PostCSS** - CSS processing
+This repo is intentionally a static app and does not require a package install or build process.
 
 ## License
 
-This project is licensed under the CC0 1.0 Universal (CC0 1.0) Public Domain Dedication. See LICENSE.md for details.
+This project is distributed for personal and educational use. Check the repository license if present in your fork.
 
-## Acknowledgments
+## Acknowledgements
 
-- Original concept based on Pokemon Mystery Dungeon Explorers of Sky personality test
-- Inspired by [pmd-quiz-online](https://github.com/Nrosa01/pmd-quiz-online) by Nrosa01
-- Books curated by Pedro García Leon
-
-## Contributing
-
-Contributions are welcome! Feel free to:
-
-- Submit bug reports
-- Suggest new books or questions
-- Contribute translations
-- Improve the UI/UX
-
-Please open an issue or submit a pull request.
-
-## Contact
-
-For questions or suggestions, please open an issue on GitHub.
-
----
-
-**Discover which book matches your personality!** 📚✨
+- Inspired by PMD-style personality tests
+- Book list and visual direction adapted for this project
