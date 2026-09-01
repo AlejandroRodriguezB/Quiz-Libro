@@ -1428,7 +1428,14 @@
           <rect x="0" y="0" width="600" height="600" rx="28" fill="rgba(10,16,28,0.82)"/>
           ${rings}
           ${axes}
-          <polygon points="${pts.map((p) => p.join(",")).join(" ")}" fill="${accent}55" stroke="${accent}" stroke-width="3"/>
+          <polygon
+            points="${pts.map((p) => p.join(",")).join(" ")}"
+            fill="${accent}"
+            fill-opacity="0.35"
+            stroke="${accent}"
+            stroke-width="3"
+            style="filter: drop-shadow(0 0 12px ${accent}AA);"
+          />
         </svg>
       `;
     }

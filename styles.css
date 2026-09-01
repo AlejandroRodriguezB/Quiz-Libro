@@ -411,9 +411,9 @@
  }
 
  .chart polygon {
-     fill: rgba(255, 255, 255, 0.12);
-     stroke: rgba(255, 255, 255, 0.55);
-     stroke-width: 2;
+     fill: rgba(255, 255, 255, 0.03);
+     stroke: rgba(255, 255, 255, 0.18);
+     stroke-width: 1;
  }
 
  .chart line {
