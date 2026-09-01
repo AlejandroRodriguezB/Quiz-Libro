@@ -410,21 +410,23 @@
      margin: 0 auto;
  }
 
- .chart polygon {
-     fill: rgba(255, 255, 255, 0.12);
-     stroke: rgba(255, 255, 255, 0.55);
-     stroke-width: 2;
- }
-
- .chart line {
-     stroke: rgba(255, 255, 255, 0.28);
+ .chart .radar-ring,
+ .chart .radar-axis {
+     fill: none;
+     stroke: rgba(255, 255, 255, 0.18);
      stroke-width: 1;
  }
 
- .chart text {
-     fill: rgba(255, 255, 255, 0.9);
+ .chart .radar-shape {
+     fill: rgba(255, 255, 255, 0.08);
+     stroke: rgba(255, 255, 255, 0.7);
+     stroke-width: 2;
+ }
+
+ .chart .nature-label {
+     fill: rgba(255, 255, 255, 0.85);
      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-     font-size: 18px;
+     font-size: 13px;
      text-anchor: middle;
      dominant-baseline: middle;
  }
