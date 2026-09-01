@@ -1378,25 +1378,28 @@
         Dócil: "#86efac",
         Osada: "#fbbf24",
         Alegre: "#f9a8d4",
-        Agitada: "#fb7185",
+        Agitada: "#f472b6",
         Ingenua: "#c4b5fd",
-        Miedosa: "#93c5fd",
-        Activa: "#5eead4",
-        Grosera: "#fcd34d",
+        Miedosa: "#60a5fa",
+        Activa: "#34d399",
+        Grosera: "#facc15",
         Serena: "#a7f3d0",
-        Plácida: "#7dd3fc",
-        Huraña: "#a5b4fc",
+        Plácida: "#8b5cf6",
+        Huraña: "#a78bfa",
         Rara: "#f0abfc",
-        Mansa: "#bae6fd",
+        Mansa: "#67e8f9",
         Alocada: "#fdba74",
-        Audaz: "#fca5a5",
+        Audaz: "#f87171",
       };
       const accent = colors[bestNature] || "#7dd3fc";
+      const maxWeight = Math.max(...NATURES.map((name) => w[name] || 0), 0.1);
 
       let pts = [];
       for (let i = 0; i < n; i++) {
+        const name = NATURES[i];
         const a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
-        const rr = r * Math.max(0.08, w[NATURES[i]]);
+        const normalized = Math.max(0.08, (w[name] || 0) / maxWeight);
+        const rr = r * normalized;
         pts.push([cx + rr * Math.cos(a), cy + rr * Math.sin(a)]);
       }
 
@@ -1415,27 +1418,33 @@
         const a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
         const x1 = cx + r * Math.cos(a);
         const y1 = cy + r * Math.sin(a);
-        const x2 = cx + (r + 34) * Math.cos(a);
-        const y2 = cy + (r + 34) * Math.sin(a);
+        const x2 = cx + (r + 42) * Math.cos(a);
+        const y2 = cy + (r + 42) * Math.sin(a);
+        const isAccent = name === bestNature;
         return `
           <line class="radar-axis" x1="${cx}" y1="${cy}" x2="${x1}" y2="${y1}" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-          <text class="nature-label" x="${x2}" y="${y2}" fill="rgba(255,255,255,0.9)" font-size="13" font-weight="700" text-anchor="middle" dominant-baseline="middle">${esc(name)}</text>
+          <text class="nature-label" x="${x2}" y="${y2}" fill="${isAccent ? accent : "rgba(255,255,255,0.88)"}" font-size="${isAccent ? 13 : 12}" font-weight="${isAccent ? 800 : 700}" text-anchor="middle" dominant-baseline="middle">${esc(name)}</text>
         `;
       }).join("");
 
       return `
         <svg class="chart" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="chartGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="5" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
           <rect x="0" y="0" width="600" height="600" rx="28" fill="rgba(10,16,28,0.82)"/>
           ${rings}
           ${axes}
           <polygon
             class="radar-shape"
             points="${pts.map((p) => p.join(",")).join(" ")}"
-            fill="${accent}"
-            fill-opacity="0.35"
-            stroke="${accent}"
-            stroke-width="3"
-            style="filter: drop-shadow(0 0 12px ${accent}AA);"
+            style="fill:${accent}; fill-opacity:0.42; stroke:${accent}; stroke-width:3; filter:url(#chartGlow);"
           />
         </svg>
       `;
