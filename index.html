@@ -1371,34 +1371,66 @@
     function chartSvg(w) {
       const cx = 300,
         cy = 300,
-        r = 220,
+        r = 200,
         n = NATURES.length;
+      const colors = {
+        Fuerte: "#7dd3fc",
+        Dócil: "#86efac",
+        Osada: "#fbbf24",
+        Alegre: "#f9a8d4",
+        Agitada: "#fb7185",
+        Ingenua: "#c4b5fd",
+        Miedosa: "#93c5fd",
+        Activa: "#5eead4",
+        Grosera: "#fcd34d",
+        Serena: "#a7f3d0",
+        Plácida: "#7dd3fc",
+        Huraña: "#a5b4fc",
+        Rara: "#f0abfc",
+        Mansa: "#bae6fd",
+        Alocada: "#fdba74",
+        Audaz: "#fca5a5",
+      };
+      const accent = colors[bestNature] || "#7dd3fc";
+
       let pts = [];
       for (let i = 0; i < n; i++) {
-        let a = -Math.PI / 2 + (i * 2 * Math.PI) / n,
-          rr = r * Math.max(0.08, w[NATURES[i]]);
+        const a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
+        const rr = r * Math.max(0.08, w[NATURES[i]]);
         pts.push([cx + rr * Math.cos(a), cy + rr * Math.sin(a)]);
       }
-      let grid = "";
-      for (let k = 1; k <= 4; k++) {
-        let rr = (r * k) / 4,
-          p = [];
+
+      let rings = "";
+      for (let k = 1; k <= 5; k++) {
+        const rr = (r * k) / 5;
+        const p = [];
         for (let i = 0; i < n; i++) {
-          let a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
+          const a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
           p.push(`${cx + rr * Math.cos(a)},${cy + rr * Math.sin(a)}`);
         }
-        grid += `<polygon points="${p.join(" ")}" style="fill:none;stroke:rgba(255,255,255,.2);stroke-width:1"/>`;
+        rings += `<polygon points="${p.join(" ")}" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>`;
       }
-      let lines = NATURES.map((name, i) => {
-        let a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
-        return `<line x1="${cx}" y1="${cy}" x2="${cx + r * Math.cos(a)}" y2="${cy + r * Math.sin(a)}"/>`;
+
+      let axes = NATURES.map((name, i) => {
+        const a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
+        const x1 = cx + r * Math.cos(a);
+        const y1 = cy + r * Math.sin(a);
+        const x2 = cx + (r + 34) * Math.cos(a);
+        const y2 = cy + (r + 34) * Math.sin(a);
+        return `
+          <line x1="${cx}" y1="${cy}" x2="${x1}" y2="${y1}" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <text x="${x2}" y="${y2}" fill="rgba(255,255,255,0.9)" font-size="13" font-weight="700" text-anchor="middle" dominant-baseline="middle">${esc(name)}</text>
+        `;
       }).join("");
-      let labels = NATURES.map((name, i) => {
-        let a = -Math.PI / 2 + (i * 2 * Math.PI) / n,
-          rr = r + 54;
-        return `<text x="${cx + rr * Math.cos(a)}" y="${cy + rr * Math.sin(a)}" font-size="18" font-weight="600" text-anchor="middle" dominant-baseline="middle">${esc(name)}</text>`;
-      }).join("");
-      return `<svg class="chart" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">${grid}${lines}<polygon points="${pts.map((p) => p.join(",")).join(" ")}"/>${labels}</svg>`;
+
+      return `
+        <svg class="chart" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="600" height="600" rx="28" fill="rgba(10,16,28,0.82)"/>
+          ${rings}
+          ${axes}
+          <polygon points="${pts.map((p) => p.join(",")).join(" ")}" fill="${accent}55" stroke="${accent}" stroke-width="3"/>
+        </svg>
+      `;
     }
     intro();
   </script>

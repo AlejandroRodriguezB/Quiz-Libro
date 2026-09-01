@@ -8,7 +8,6 @@ Quiz-Libro/
 ├── index.html
 ├── styles.css
 ├── files/
-│   ├── books-data.json
 │   ├── audio/
 │   └── img/
 │       ├── covers/
