@@ -1408,7 +1408,7 @@
           const a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
           p.push(`${cx + rr * Math.cos(a)},${cy + rr * Math.sin(a)}`);
         }
-        rings += `<polygon points="${p.join(" ")}" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>`;
+        rings += `<polygon class="radar-ring" points="${p.join(" ")}" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>`;
       }
 
       let axes = NATURES.map((name, i) => {
@@ -1418,8 +1418,8 @@
         const x2 = cx + (r + 34) * Math.cos(a);
         const y2 = cy + (r + 34) * Math.sin(a);
         return `
-          <line x1="${cx}" y1="${cy}" x2="${x1}" y2="${y1}" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-          <text x="${x2}" y="${y2}" fill="rgba(255,255,255,0.9)" font-size="13" font-weight="700" text-anchor="middle" dominant-baseline="middle">${esc(name)}</text>
+          <line class="radar-axis" x1="${cx}" y1="${cy}" x2="${x1}" y2="${y1}" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <text class="nature-label" x="${x2}" y="${y2}" fill="rgba(255,255,255,0.9)" font-size="13" font-weight="700" text-anchor="middle" dominant-baseline="middle">${esc(name)}</text>
         `;
       }).join("");
 
@@ -1429,6 +1429,7 @@
           ${rings}
           ${axes}
           <polygon
+            class="radar-shape"
             points="${pts.map((p) => p.join(",")).join(" ")}"
             fill="${accent}"
             fill-opacity="0.35"
